@@ -1,0 +1,207 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* ===== Body ===== */
+body {
+  background: linear-gradient(135deg, #f0f4ff, #e0ecff);
+  color: #1e293b;
+  padding: 40px;
+  min-height: 100vh;
+}
+
+/* ===== Dark Mode ===== */
+body.dark-mode {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #f1f5f9;
+}
+
+/* ===== Title ===== */
+#head h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: #1e3a8a;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+body.dark-mode #head h1 {
+  color: #f1f5f9;
+}
+
+/* ===== Table Container ===== */
+table {
+  margin: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+}
+
+body.dark-mode table {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+
+/* ===== Inputs ===== */
+table input {
+  padding: 12px;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+  outline: none;
+  width: 200px;
+  font-size: 15px;
+}
+
+table input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+}
+
+body.dark-mode table input {
+  background: #334155;
+  color: #f1f5f9;
+  border: 1px solid #475569;
+}
+
+/* ===== Buttons ===== */
+button {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 25px;
+  margin: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+body.dark-mode button {
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #f1f5f9;
+}
+
+/* ===== Todo List ===== */
+#todoList {
+  list-style: none;
+  max-width: 70%;
+  margin: 25px auto 0 auto;
+  padding: 0;
+}
+
+/* ===== List Items ===== */
+#todoList li {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e5e7eb;
+  border-left: 6px solid #3b82f6;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+  backdrop-filter: blur(4px);
+}
+
+#todoList li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+body.dark-mode #todoList li {
+  background: rgba(30,41,59,0.95);
+  border: 1px solid #475569;
+  border-left-color: #3b82f6;
+  color: #f1f5f9;
+}
+
+/* ===== Student Info Spans ===== */
+#todoList li span.gg {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b;
+  margin-right: 18px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.dark-mode #todoList li span.gg {
+  color: #f1f5f9;
+}
+
+/* ===== Trash and Edit Icons ===== */
+#todoList li i {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#todoList li i.bi-trash {
+  font-size: 20px;
+  color: #ef4444;
+  margin-left: 10px;
+}
+
+#todoList li i.bi-trash:hover {
+  color: #dc2626;
+  transform: scale(1.15);
+}
+
+#todoList li i.bi-pencil-square {
+  font-size: 20px;
+  color: #f59e0b;
+}
+
+#todoList li i.bi-pencil-square:hover {
+  color: #d97706;
+  transform: scale(1.15);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  table input {
+    width: 140px;
+  }
+
+  #todoList {
+    max-width: 90%;
+  }
+
+  #todoList li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #todoList li span.gg {
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  #head h1 {
+    font-size: 24px;
+  }
+}

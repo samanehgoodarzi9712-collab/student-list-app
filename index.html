@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="toggleTheme">☀️ Light Mode</button>
+
+    <div id="head">
+        <h1>List of second univercity student</h1>
+      </div>
+    <table class="table table-responsive" id="table">
+      
+      <tr>
+        <td><input type="text" id="firstname" placeholder="Enter name" /></td>
+        <td>
+          <input type="text" id="secondname" placeholder="Enter family" />
+        </td>
+        <td><input type="text" id="age" placeholder="Enter age" /></td>
+        <td><input type="data" id="date" placeholder="----" /></td>
+      </tr>
+    </table>
+    <button onclick="add_list()">add</button>
+    <button onclick="replace(this)">add to list</button>
+    <ul id="todoList"></ul>
+
+
+    <script>
+      // dark
+      const toggleBtn = document.getElementById('toggleTheme');
+
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+
+  if(document.body.classList.contains('dark-mode')){
+     toggleBtn.textContent = '🌙 Dark Mode';
+  } else {
+  
+     toggleBtn.textContent = '☀️ Light Mode';
+  }
+});
+
+      // light
+
+
+
+
+      document.getElementById("firstname").addEventListener("input", function () {
+  this.value = this.value.replace(/[^A-Za-z]/g, "");
+});
+
+      let student = [];
+      let x = 1;
+      let currentLi = null; // li
+
+      //   addtolist
+      let todo = document.getElementById("todoList");
+      function add_list() {
+        console.log(student);
+        let fname = document.getElementById("firstname").value;
+
+        let sename = document.getElementById("secondname").value;
+        let fage = parseInt(document.getElementById("age").value);
+        let fdate = document.getElementById("date").value;
+        let slashone = fdate.indexOf("/");
+        let slashtwo = fdate.lastIndexOf("/");
+        if (slashone == slashtwo || slashone == -1) {
+        } else {
+          let year = parseInt(fdate.slice(0, 4));
+          let month = parseInt(fdate.slice(slashone + 1, slashtwo));
+          let day = parseInt(fdate.slice(slashtwo + 1, fdate.length));
+
+          if (
+            fname.length > 0 &&
+            sename.length > 0 &&
+            fage > 0 &&
+            year > 1358 &&
+            month > 0 &&
+            month <= 12 &&
+            day <= 31 &&
+            day > 0
+          ) {
+            student.push({
+              namemain: fname,
+              familynamemain: sename,
+              datemain: fdate,
+              agemain: fage,
+            });
+
+            let li = document.createElement("li");
+            let taxspan = document.createElement("span");
+            taxspan.classList.add("gg");
+            taxspan.textContent = ` First Name: ${fname}  `;
+            li.classList.add("h");
+            li.appendChild(taxspan);
+            li.setAttribute("id", "row" + x);
+            x++;
+
+            todo.appendChild(li);
+            let taxspanfamily = document.createElement("span");
+            taxspanfamily.textContent = `Family Name: ${sename}`;
+            taxspanfamily.classList.add("gg");
+            li.appendChild(taxspanfamily);
+
+            let taxspanage = document.createElement("span");
+            taxspanage.textContent = `Age: ${fage}`;
+            taxspanage.classList.add("gg");
+            li.appendChild(taxspanage);
+
+            let taxspandate = document.createElement("span");
+            taxspandate.textContent = `Date: ${fdate}`;
+            taxspandate.classList.add("gg");
+            li.appendChild(taxspandate);
+
+            let atrash = document.createElement("a");
+            atrash.setAttribute("id", "atrsh");
+            atrash.setAttribute("href", "#");
+            li.appendChild(atrash);
+
+            let trash = document.createElement("i");
+            trash.classList.add("bi");
+            trash.classList.add("bi-trash");
+            atrash.appendChild(trash);
+            trash.addEventListener("click", function (e) {
+              console.log(e.target.parentNode.parentNode.id);
+              let idli = e.target.parentNode.parentNode.id;
+              document.getElementById(idli).remove();
+            });
+            let aedit = document.createElement("a");
+            aedit.setAttribute("id", "edit");
+            aedit.setAttribute("href", "#");
+            li.appendChild(aedit);
+
+            let imgedit = document.createElement("i");
+            imgedit.classList.add("bi");
+            imgedit.classList.add("bi-pencil-square");
+            aedit.appendChild(imgedit);
+
+            imgedit.addEventListener("click", function (e) {
+              currentLi = e.target.parentNode.parentNode; // li موردنظر
+              document.getElementById("firstname").value =
+                currentLi.childNodes[0].textContent.replace("First Name: ", "");
+              document.getElementById("secondname").value =
+                currentLi.childNodes[1].textContent.replace(
+                  "Family Name: ",
+                  ""
+                );
+              document.getElementById("age").value =
+                currentLi.childNodes[2].textContent.replace("Age: ", "");
+              document.getElementById("date").value =
+                currentLi.childNodes[3].textContent.replace("Date: ", "");
+            });
+
+            document.getElementById("firstname").value = "";
+            document.getElementById("secondname").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("firstname").focus();
+          }
+        }
+      }
+      function replace(t) {
+        let fname = document.getElementById("firstname").value;
+        let sename = document.getElementById("secondname").value;
+        let fage = parseInt(document.getElementById("age").value);
+        let fdate = document.getElementById("date").value;
+
+        if (!fname || !sename || !fage || !fdate) return;
+
+        if (currentLi) {
+          // abdait span
+          currentLi.childNodes[0].textContent = `First Name: ${fname}`;
+          currentLi.childNodes[1].textContent = `Family Name: ${sename}`;
+          currentLi.childNodes[2].textContent = `Age: ${fage}`;
+          currentLi.childNodes[3].textContent = `Date: ${fdate}`;
+
+          currentLi = null; // reset
+        } else {
+          // creat li
+          let li = document.createElement("li");
+          li.setAttribute("id", "row" + Date.now());
+          li.classList.add("h");
+
+          let taxspan = document.createElement("span");
+          taxspan.textContent = `First Name: ${fname}`;
+          li.appendChild(taxspan);
+
+          let taxspanfamily = document.createElement("span");
+          taxspanfamily.textContent = `Family Name: ${sename}`;
+          li.appendChild(taxspanfamily);
+
+          let taxspanage = document.createElement("span");
+          taxspanage.textContent = `Age: ${fage}`;
+          li.appendChild(taxspanage);
+
+          let taxspandate = document.createElement("span");
+          taxspandate.textContent = `Date: ${fdate}`;
+          li.appendChild(taxspandate);
+
+          //  add trash,edit
+          todo.appendChild(li);
+        }
+
+        // clean input
+        document.getElementById("firstname").value = "";
+        document.getElementById("secondname").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("date").value = "";
+      }
+    </script>
+  </body>
+</html>
